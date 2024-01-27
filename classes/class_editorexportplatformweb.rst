@@ -21,6 +21,8 @@ Tutorials
 
 - :doc:`Exporting for the Web <../tutorials/export/exporting_for_web>`
 
+- :doc:`Web documentation index <../tutorials/platform/web/index>`
+
 .. rst-class:: classref-reftable-group
 
 Properties
@@ -63,6 +65,8 @@ Properties
    | :ref:`int<class_int>`       | :ref:`progressive_web_app/orientation<class_EditorExportPlatformWeb_property_progressive_web_app/orientation>`           |
    +-----------------------------+--------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`     | :ref:`variant/extensions_support<class_EditorExportPlatformWeb_property_variant/extensions_support>`                     |
+   +-----------------------------+--------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`     | :ref:`variant/thread_support<class_EditorExportPlatformWeb_property_variant/thread_support>`                             |
    +-----------------------------+--------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`     | :ref:`vram_texture_compression/for_desktop<class_EditorExportPlatformWeb_property_vram_texture_compression/for_desktop>` |
    +-----------------------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -305,6 +309,20 @@ The canvas resize policy determines how the canvas should be resized by Godot.
 .. container:: contribute
 
 	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformWeb_property_variant/thread_support:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **variant/thread_support**
+
+If enabled, the exported game will support threads. It requires `a "cross-origin isolated" website <https://web.dev/articles/coop-coep>`__, which can be difficult to setup and brings some limitations (e.g. not being able to communicate with third-party websites).
+
+If disabled, the exported game will not support threads. As a result, it is more prone to performance and audio issues, but will only require to be run on a HTTPS website.
 
 .. rst-class:: classref-item-separator
 

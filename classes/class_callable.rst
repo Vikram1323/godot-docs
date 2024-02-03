@@ -68,18 +68,9 @@ In GDScript, it's possible to create lambda functions within a method. Lambda fu
         # Prints "Attack!", when the button_pressed signal is emitted.
         button_pressed.connect(func(): print("Attack!"))
 
-\ **Note:** Methods of native types such as :ref:`Signal<class_Signal>`, :ref:`Array<class_Array>`, or :ref:`Dictionary<class_Dictionary>` are not of type **Callable** in order to avoid unnecessary overhead. If you need to pass those methods as **Callable**, use a lambda function as a wrapper.
+.. note::
 
-::
-
-    func _init():
-        var my_dictionary = { "hello": "world" }
-    
-        # This will not work, `clear` is not a callable.
-        create_tween().tween_callback(my_dictionary.clear)
-    
-        # This will work, as lambdas are custom callables.
-        create_tween().tween_callback(func(): my_dictionary.clear())
+	There are notable differences when using this API with C#. See :ref:`doc_c_sharp_differences` for more information.
 
 .. rst-class:: classref-reftable-group
 
@@ -304,7 +295,7 @@ Returns the total amount of arguments bound (or unbound) via successive :ref:`bi
 
 :ref:`StringName<class_StringName>` **get_method** **(** **)** |const|
 
-Returns the name of the method represented by this **Callable**. If the callable is a lambda function, returns the function's name.
+Returns the name of the method represented by this **Callable**. If the callable is a GDScript lambda function, returns the function's name or ``"<anonymous lambda>"``.
 
 .. rst-class:: classref-item-separator
 

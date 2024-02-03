@@ -25,7 +25,7 @@ It will attempt to match font style, but it's not guaranteed.
 
 The returned font might be part of a font collection or be a variable font with OpenType "weight", "width" and/or "italic" features set.
 
-You can create :ref:`FontVariation<class_FontVariation>` of the system font for fine control over its features.
+You can create :ref:`FontVariation<class_FontVariation>` of the system font for precise control over its features.
 
 \ **Note:** This class is implemented on iOS, Linux, macOS and Windows, on other platforms it will fallback to default theme font.
 
@@ -41,8 +41,6 @@ Properties
    | :ref:`bool<class_bool>`                                         | :ref:`allow_system_fallback<class_SystemFont_property_allow_system_fallback>`                           | ``true``                |
    +-----------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------+
    | :ref:`FontAntialiasing<enum_TextServer_FontAntialiasing>`       | :ref:`antialiasing<class_SystemFont_property_antialiasing>`                                             | ``1``                   |
-   +-----------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------+
-   | :ref:`Font[]<class_Font>`                                       | :ref:`fallbacks<class_SystemFont_property_fallbacks>`                                                   | ``[]``                  |
    +-----------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------+
    | :ref:`bool<class_bool>`                                         | :ref:`font_italic<class_SystemFont_property_font_italic>`                                               | ``false``               |
    +-----------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------+
@@ -107,23 +105,6 @@ If set to ``true``, system fonts can be automatically used as fallbacks.
 - :ref:`FontAntialiasing<enum_TextServer_FontAntialiasing>` **get_antialiasing** **(** **)**
 
 Font anti-aliasing mode.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_SystemFont_property_fallbacks:
-
-.. rst-class:: classref-property
-
-:ref:`Font[]<class_Font>` **fallbacks** = ``[]``
-
-.. rst-class:: classref-property-setget
-
-- void **set_fallbacks** **(** :ref:`Font[]<class_Font>` value **)**
-- :ref:`Font[]<class_Font>` **get_fallbacks** **(** **)**
-
-Array of fallback :ref:`Font<class_Font>`\ s.
 
 .. rst-class:: classref-item-separator
 

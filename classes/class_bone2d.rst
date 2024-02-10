@@ -104,7 +104,7 @@ Method Descriptions
 
 void **apply_rest** **(** **)**
 
-Stores the node's current transforms in :ref:`rest<class_Bone2D_property_rest>`.
+Resets the bone to the rest pose. This is equivalent to setting :ref:`Node2D.transform<class_Node2D_property_transform>` to :ref:`rest<class_Bone2D_property_rest>`.
 
 .. rst-class:: classref-item-separator
 
@@ -166,7 +166,7 @@ Returns the length of the bone in the **Bone2D** node.
 
 :ref:`Transform2D<class_Transform2D>` **get_skeleton_rest** **(** **)** |const|
 
-Returns the node's :ref:`rest<class_Bone2D_property_rest>` ``Transform2D`` if it doesn't have a parent, or its rest pose relative to its parent.
+Returns the node's :ref:`rest<class_Bone2D_property_rest>` :ref:`Transform2D<class_Transform2D>` if it doesn't have a parent, or its rest pose relative to its parent.
 
 .. rst-class:: classref-item-separator
 
@@ -192,7 +192,7 @@ void **set_bone_angle** **(** :ref:`float<class_float>` angle **)**
 
 Sets the bone angle for the **Bone2D**. This is typically set to the rotation from the **Bone2D** to a child **Bone2D** node.
 
-\ **Note:** **Note:** This is different from the **Bone2D**'s rotation. The bone's angle is the rotation of the bone shown by the gizmo, which is unaffected by the **Bone2D**'s :ref:`Node2D.transform<class_Node2D_property_transform>`.
+\ **Note:** This is different from the **Bone2D**'s rotation. The bone's angle is the rotation of the bone shown by the gizmo, which is unaffected by the **Bone2D**'s :ref:`Node2D.transform<class_Node2D_property_transform>`.
 
 .. rst-class:: classref-item-separator
 

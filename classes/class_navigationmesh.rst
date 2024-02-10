@@ -26,9 +26,9 @@ A navigation mesh is a collection of polygons that define which areas of an envi
 Tutorials
 ---------
 
-- `3D Navmesh Demo <https://godotengine.org/asset-library/asset/124>`__
-
 - :doc:`Using NavigationMeshes <../tutorials/navigation/navigation_using_navigationmeshes>`
+
+- `3D Navmesh Demo <https://godotengine.org/asset-library/asset/124>`__
 
 .. rst-class:: classref-reftable-group
 
@@ -47,6 +47,8 @@ Properties
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`float<class_float>`                                           | :ref:`agent_radius<class_NavigationMesh_property_agent_radius>`                                         | ``0.5``                             |
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
+   | :ref:`float<class_float>`                                           | :ref:`border_size<class_NavigationMesh_property_border_size>`                                           | ``0.0``                             |
+   +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`float<class_float>`                                           | :ref:`cell_height<class_NavigationMesh_property_cell_height>`                                           | ``0.25``                            |
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`float<class_float>`                                           | :ref:`cell_size<class_NavigationMesh_property_cell_size>`                                               | ``0.25``                            |
@@ -57,7 +59,7 @@ Properties
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`float<class_float>`                                           | :ref:`edge_max_error<class_NavigationMesh_property_edge_max_error>`                                     | ``1.3``                             |
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
-   | :ref:`float<class_float>`                                           | :ref:`edge_max_length<class_NavigationMesh_property_edge_max_length>`                                   | ``12.0``                            |
+   | :ref:`float<class_float>`                                           | :ref:`edge_max_length<class_NavigationMesh_property_edge_max_length>`                                   | ``0.0``                             |
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
    | :ref:`AABB<class_AABB>`                                             | :ref:`filter_baking_aabb<class_NavigationMesh_property_filter_baking_aabb>`                             | ``AABB(0, 0, 0, 0, 0, 0)``          |
    +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+-------------------------------------+
@@ -96,6 +98,8 @@ Methods
 
    +-----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                | :ref:`add_polygon<class_NavigationMesh_method_add_polygon>` **(** :ref:`PackedInt32Array<class_PackedInt32Array>` polygon **)**                                     |
+   +-----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | void                                                | :ref:`clear<class_NavigationMesh_method_clear>` **(** **)**                                                                                                         |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | void                                                | :ref:`clear_polygons<class_NavigationMesh_method_clear_polygons>` **(** **)**                                                                                       |
    +-----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -328,6 +332,27 @@ The distance to erode/shrink the walkable area of the heightfield away from obst
 
 ----
 
+.. _class_NavigationMesh_property_border_size:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **border_size** = ``0.0``
+
+.. rst-class:: classref-property-setget
+
+- void **set_border_size** **(** :ref:`float<class_float>` value **)**
+- :ref:`float<class_float>` **get_border_size** **(** **)**
+
+The size of the non-navigable border around the bake bounding area.
+
+In conjunction with the :ref:`filter_baking_aabb<class_NavigationMesh_property_filter_baking_aabb>` and a :ref:`edge_max_error<class_NavigationMesh_property_edge_max_error>` value at ``1.0`` or below the border size can be used to bake tile aligned navigation meshes without the tile edges being shrunk by :ref:`agent_radius<class_NavigationMesh_property_agent_radius>`.
+
+\ **Note:** While baking and not zero, this value will be rounded up to the nearest multiple of :ref:`cell_size<class_NavigationMesh_property_cell_size>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_NavigationMesh_property_cell_height:
 
 .. rst-class:: classref-property
@@ -407,7 +432,7 @@ The maximum distance the detail mesh surface should deviate from heightfield, in
 - void **set_edge_max_error** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_edge_max_error** **(** **)**
 
-The maximum distance a simplfied contour's border edges should deviate the original raw contour.
+The maximum distance a simplified contour's border edges should deviate the original raw contour.
 
 .. rst-class:: classref-item-separator
 
@@ -417,14 +442,14 @@ The maximum distance a simplfied contour's border edges should deviate the origi
 
 .. rst-class:: classref-property
 
-:ref:`float<class_float>` **edge_max_length** = ``12.0``
+:ref:`float<class_float>` **edge_max_length** = ``0.0``
 
 .. rst-class:: classref-property-setget
 
 - void **set_edge_max_length** **(** :ref:`float<class_float>` value **)**
 - :ref:`float<class_float>` **get_edge_max_length** **(** **)**
 
-The maximum allowed length for contour edges along the border of the mesh.
+The maximum allowed length for contour edges along the border of the mesh. A value of ``0.0`` disables this feature.
 
 \ **Note:** While baking, this value will be rounded up to the nearest multiple of :ref:`cell_size<class_NavigationMesh_property_cell_size>`.
 
@@ -673,6 +698,18 @@ Method Descriptions
 void **add_polygon** **(** :ref:`PackedInt32Array<class_PackedInt32Array>` polygon **)**
 
 Adds a polygon using the indices of the vertices you get when calling :ref:`get_vertices<class_NavigationMesh_method_get_vertices>`.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_NavigationMesh_method_clear:
+
+.. rst-class:: classref-method
+
+void **clear** **(** **)**
+
+Clears the internal arrays for vertices and polygon indices.
 
 .. rst-class:: classref-item-separator
 

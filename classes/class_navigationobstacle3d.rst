@@ -10,6 +10,8 @@
 NavigationObstacle3D
 ====================
 
+**Experimental:** This class may be changed or removed in future versions.
+
 **Inherits:** :ref:`Node3D<class_Node3D>` **<** :ref:`Node<class_Node>` **<** :ref:`Object<class_Object>`
 
 3D Obstacle used in navigation to constrain avoidance controlled agents outside or inside an area.
@@ -115,7 +117,7 @@ If ``true`` the obstacle affects avoidance using agents.
 - void **set_avoidance_layers** **(** :ref:`int<class_int>` value **)**
 - :ref:`int<class_int>` **get_avoidance_layers** **(** **)**
 
-A bitfield determining the avoidance layers for this obstacle. Agent's with a matching bit on the their avoidance mask will avoid this obstacle.
+A bitfield determining the avoidance layers for this obstacle. Agents with a matching bit on the their avoidance mask will avoid this obstacle.
 
 .. rst-class:: classref-item-separator
 

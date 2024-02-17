@@ -19,7 +19,7 @@ A ray in 2D space, used to find the first :ref:`CollisionObject2D<class_Collisio
 Description
 -----------
 
-A raycast represents a ray from its origin to its :ref:`target_position<class_RayCast2D_property_target_position>` that finds the closest :ref:`CollisionObject2D<class_CollisionObject2D>` along its path, if it intersects any. This is useful for a lot of things, such as
+A raycast represents a ray from its origin to its :ref:`target_position<class_RayCast2D_property_target_position>` that finds the closest :ref:`CollisionObject2D<class_CollisionObject2D>` along its path, if it intersects any.
 
 \ **RayCast2D** can ignore some objects by adding them to an exception list, by making its detection reporting ignore :ref:`Area2D<class_Area2D>`\ s (:ref:`collide_with_areas<class_RayCast2D_property_collide_with_areas>`) or :ref:`PhysicsBody2D<class_PhysicsBody2D>`\ s (:ref:`collide_with_bodies<class_RayCast2D_property_collide_with_bodies>`), or by configuring physics layers.
 
@@ -116,7 +116,7 @@ Property Descriptions
 - void **set_collide_with_areas** **(** :ref:`bool<class_bool>` value **)**
 - :ref:`bool<class_bool>` **is_collide_with_areas_enabled** **(** **)**
 
-If ``true``, collision with :ref:`Area2D<class_Area2D>`\ s will be reported.
+If ``true``, collisions with :ref:`Area2D<class_Area2D>`\ s will be reported.
 
 .. rst-class:: classref-item-separator
 
@@ -133,7 +133,7 @@ If ``true``, collision with :ref:`Area2D<class_Area2D>`\ s will be reported.
 - void **set_collide_with_bodies** **(** :ref:`bool<class_bool>` value **)**
 - :ref:`bool<class_bool>` **is_collide_with_bodies_enabled** **(** **)**
 
-If ``true``, collision with :ref:`PhysicsBody2D<class_PhysicsBody2D>`\ s will be reported.
+If ``true``, collisions with :ref:`PhysicsBody2D<class_PhysicsBody2D>`\ s will be reported.
 
 .. rst-class:: classref-item-separator
 
@@ -271,7 +271,7 @@ Removes all collision exceptions for this ray.
 
 void **force_raycast_update** **(** **)**
 
-Updates the collision information for the ray. Use this method to update the collision information immediately instead of waiting for the next ``_physics_process`` call, for example if the ray or its parent has changed state.
+Updates the collision information for the ray immediately, without waiting for the next ``_physics_process`` call. Use this method, for example, when the ray or its parent has changed state.
 
 \ **Note:** :ref:`enabled<class_RayCast2D_property_enabled>` does not need to be ``true`` for this to work.
 
@@ -345,7 +345,7 @@ Returns the normal of the intersecting object's shape at the collision point, or
 
 :ref:`Vector2<class_Vector2>` **get_collision_point** **(** **)** |const|
 
-Returns the collision point at which the ray intersects the closest object.
+Returns the collision point at which the ray intersects the closest object. If :ref:`hit_from_inside<class_RayCast2D_property_hit_from_inside>` is ``true`` and the ray starts inside of a collision shape, this function will return the origin point of the ray.
 
 \ **Note:** This point is in the **global** coordinate system.
 

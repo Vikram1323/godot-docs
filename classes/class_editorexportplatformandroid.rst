@@ -21,7 +21,9 @@ Tutorials
 
 - :doc:`Exporting for Android <../tutorials/export/exporting_for_android>`
 
-- :doc:`Custom builds for Android <../tutorials/export/android_custom_build>`
+- :doc:`Gradle builds for Android <../tutorials/export/android_gradle_build>`
+
+- :doc:`Android plugins documentation index <../tutorials/platform/index>`
 
 .. rst-class:: classref-reftable-group
 
@@ -52,7 +54,13 @@ Properties
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`custom_template/release<class_EditorExportPlatformAndroid_property_custom_template/release>`                                               |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`gradle_build/android_source_template<class_EditorExportPlatformAndroid_property_gradle_build/android_source_template>`                     |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`gradle_build/compress_native_libraries<class_EditorExportPlatformAndroid_property_gradle_build/compress_native_libraries>`                 |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`gradle_build/export_format<class_EditorExportPlatformAndroid_property_gradle_build/export_format>`                                         |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`String<class_String>`                       | :ref:`gradle_build/gradle_build_directory<class_EditorExportPlatformAndroid_property_gradle_build/gradle_build_directory>`                       |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`gradle_build/min_sdk<class_EditorExportPlatformAndroid_property_gradle_build/min_sdk>`                                                     |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -87,6 +95,12 @@ Properties
    | :ref:`String<class_String>`                       | :ref:`package/name<class_EditorExportPlatformAndroid_property_package/name>`                                                                     |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`package/retain_data_on_uninstall<class_EditorExportPlatformAndroid_property_package/retain_data_on_uninstall>`                             |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`package/show_as_launcher_app<class_EditorExportPlatformAndroid_property_package/show_as_launcher_app>`                                     |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`package/show_in_android_tv<class_EditorExportPlatformAndroid_property_package/show_in_android_tv>`                                         |
+   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`bool<class_bool>`                           | :ref:`package/show_in_app_library<class_EditorExportPlatformAndroid_property_package/show_in_app_library>`                                       |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`bool<class_bool>`                           | :ref:`package/signed<class_EditorExportPlatformAndroid_property_package/signed>`                                                                 |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -402,12 +416,6 @@ Properties
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`String<class_String>`                       | :ref:`version/name<class_EditorExportPlatformAndroid_property_version/name>`                                                                     |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                             | :ref:`xr_features/hand_tracking<class_EditorExportPlatformAndroid_property_xr_features/hand_tracking>`                                           |
-   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                             | :ref:`xr_features/hand_tracking_frequency<class_EditorExportPlatformAndroid_property_xr_features/hand_tracking_frequency>`                       |
-   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-   | :ref:`int<class_int>`                             | :ref:`xr_features/passthrough<class_EditorExportPlatformAndroid_property_xr_features/passthrough>`                                               |
-   +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`int<class_int>`                             | :ref:`xr_features/xr_mode<class_EditorExportPlatformAndroid_property_xr_features/xr_mode>`                                                       |
    +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -524,7 +532,9 @@ A list of additional command line arguments, exported project will receive when 
 
 :ref:`String<class_String>` **custom_template/debug**
 
-Path to the custom export template. If left empty, default template is used.
+Path to an APK file to use as a custom export template for debug exports. If left empty, default template is used.
+
+\ **Note:** This is only used if :ref:`gradle_build/use_gradle_build<class_EditorExportPlatformAndroid_property_gradle_build/use_gradle_build>` is disabled.
 
 .. rst-class:: classref-item-separator
 
@@ -536,7 +546,35 @@ Path to the custom export template. If left empty, default template is used.
 
 :ref:`String<class_String>` **custom_template/release**
 
-Path to the custom export template. If left empty, default template is used.
+Path to an APK file to use as a custom export template for release exports. If left empty, default template is used.
+
+\ **Note:** This is only used if :ref:`gradle_build/use_gradle_build<class_EditorExportPlatformAndroid_property_gradle_build/use_gradle_build>` is disabled.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformAndroid_property_gradle_build/android_source_template:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **gradle_build/android_source_template**
+
+Path to a ZIP file holding the source for the export template used in a Gradle build. If left empty, the default template is used.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformAndroid_property_gradle_build/compress_native_libraries:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **gradle_build/compress_native_libraries**
+
+If ``true``, native libraries are compressed when performing a Gradle build.
+
+\ **Note:** Although your binary may be smaller, your application may load slower because the native libraries are not loaded directly from the binary at runtime.
 
 .. rst-class:: classref-item-separator
 
@@ -549,6 +587,18 @@ Path to the custom export template. If left empty, default template is used.
 :ref:`int<class_int>` **gradle_build/export_format**
 
 Export format for Gradle build.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformAndroid_property_gradle_build/gradle_build_directory:
+
+.. rst-class:: classref-property
+
+:ref:`String<class_String>` **gradle_build/gradle_build_directory**
+
+Path to the Gradle build directory. If left empty, then ``res://android`` will be used.
 
 .. rst-class:: classref-item-separator
 
@@ -776,6 +826,44 @@ If ``true``, when the user uninstalls an app, a prompt to keep the app's data wi
 
 ----
 
+.. _class_EditorExportPlatformAndroid_property_package/show_as_launcher_app:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **package/show_as_launcher_app**
+
+If ``true``, the user will be able to set this app as the system launcher in Android preferences.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformAndroid_property_package/show_in_android_tv:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **package/show_in_android_tv**
+
+If ``true``, this app will show in Android TV launcher UI.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_EditorExportPlatformAndroid_property_package/show_in_app_library:
+
+.. rst-class:: classref-property
+
+:ref:`bool<class_bool>` **package/show_in_app_library**
+
+If ``true``, this app will show in the device's app library.
+
+\ **Note:** This is ``true`` by default.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_EditorExportPlatformAndroid_property_package/signed:
 
 .. rst-class:: classref-property
@@ -794,7 +882,13 @@ If ``true``, package signing is enabled.
 
 :ref:`String<class_String>` **package/unique_name**
 
-Unique application identifier in a reverse-DNS format, can only contain alphanumeric characters (``A-Z``, ``a-z``, and ``0-9``), hyphens (``-``), and periods (``.``).
+Unique application identifier in a reverse-DNS format. The reverse DNS format should preferably match a domain name you control, but this is not strictly required. For instance, if you own ``example.com``, your package unique name should preferably be of the form ``com.example.mygame``. This identifier can only contain lowercase alphanumeric characters (``a-z``, and ``0-9``), underscores (``_``), and periods (``.``). Each component of the reverse DNS format must start with a letter: for instance, ``com.example.8game`` is not valid.
+
+If ``$genname`` is present in the value, it will be replaced by the project name converted to lowercase. If there are invalid characters in the project name, they will be stripped. If all characters in the project name are stripped, ``$genname`` is replaced by ``noname``.
+
+\ **Note:** Changing the package name will cause the package to be considered as a new package, with its own installation and data paths. The new package won't be usable to update existing installations.
+
+\ **Note:** When publishing to Google Play, the package name must be *globally* unique. This means no other apps published on Google Play must be using the same package name as yours. Otherwise, you'll be prevented from publishing your app on Google Play.
 
 .. rst-class:: classref-item-separator
 
@@ -938,7 +1032,7 @@ Allows an application to act as an AccountAuthenticator for the AccountManager.
 
 :ref:`bool<class_bool>` **permissions/battery_stats**
 
-Allows an application to collect battery statistics. Sett `BATTERY_STATS <https://developer.android.com/reference/android/Manifest.permission#BATTERY_STATS>`__.
+Allows an application to collect battery statistics. See `BATTERY_STATS <https://developer.android.com/reference/android/Manifest.permission#BATTERY_STATS>`__.
 
 .. rst-class:: classref-item-separator
 
@@ -1358,7 +1452,7 @@ Array of custom permission strings.
 
 :ref:`bool<class_bool>` **permissions/delete_cache_files**
 
-Deprecated.
+**Deprecated:** This property may be changed or removed in future versions.
 
 .. rst-class:: classref-item-separator
 
@@ -1502,7 +1596,7 @@ Allows an application to find out the space used by any package. See `GET_PACKAG
 
 :ref:`bool<class_bool>` **permissions/get_tasks**
 
-Deprecated in API level 21.
+**Deprecated:** Deprecated in API level 21.
 
 .. rst-class:: classref-item-separator
 
@@ -1778,9 +1872,9 @@ Allows applications to perform I/O operations over NFC. See `NFC <https://develo
 
 :ref:`bool<class_bool>` **permissions/persistent_activity**
 
-Allow an application to make its activities persistent.
+**Deprecated:** Deprecated in API level 15.
 
-Deprecated in API level 15.
+Allow an application to make its activities persistent.
 
 .. rst-class:: classref-item-separator
 
@@ -1792,9 +1886,9 @@ Deprecated in API level 15.
 
 :ref:`bool<class_bool>` **permissions/process_outgoing_calls**
 
-Allows an application to see the number being dialed during an outgoing call with the option to redirect the call to a different number or abort the call altogether. See `PROCESS_OUTGOING_CALLS <https://developer.android.com/reference/android/Manifest.permission#PROCESS_OUTGOING_CALLS>`__.
+**Deprecated:** Deprecated in API level 29.
 
-Deprecated in API level 29.
+Allows an application to see the number being dialed during an outgoing call with the option to redirect the call to a different number or abort the call altogether. See `PROCESS_OUTGOING_CALLS <https://developer.android.com/reference/android/Manifest.permission#PROCESS_OUTGOING_CALLS>`__.
 
 .. rst-class:: classref-item-separator
 
@@ -1842,9 +1936,9 @@ Allows an application to read the user's contacts data. See `READ_CONTACTS <http
 
 :ref:`bool<class_bool>` **permissions/read_external_storage**
 
-Allows an application to read from external storage. See `READ_EXTERNAL_STORAGE <https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE>`__.
+**Deprecated:** Deprecated in API level 33.
 
-Deprecated in API level 33.
+Allows an application to read from external storage. See `READ_EXTERNAL_STORAGE <https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE>`__.
 
 .. rst-class:: classref-item-separator
 
@@ -1880,7 +1974,7 @@ Allows an application to read (but not write) the user's browsing history and bo
 
 :ref:`bool<class_bool>` **permissions/read_input_state**
 
-Deprecated in API level 16.
+**Deprecated:** Deprecated in API level 16.
 
 .. rst-class:: classref-item-separator
 
@@ -2072,7 +2166,7 @@ Allows an application to change the Z-order of tasks. See `REORDER_TASKS <https:
 
 :ref:`bool<class_bool>` **permissions/restart_packages**
 
-Deprecated in API level 15.
+**Deprecated:** Deprecated in API level 15.
 
 .. rst-class:: classref-item-separator
 
@@ -2192,7 +2286,7 @@ Allows low-level access to setting the pointer speed.
 
 :ref:`bool<class_bool>` **permissions/set_preferred_applications**
 
-Deprecated in API level 15.
+**Deprecated:** Deprecated in API level 15.
 
 .. rst-class:: classref-item-separator
 
@@ -2300,7 +2394,7 @@ Allows an application to allow access the subscribed feeds ContentProvider.
 
 :ref:`bool<class_bool>` **permissions/subscribed_feeds_write**
 
-Deprecated.
+**Deprecated:** This property may be changed or removed in future versions.
 
 .. rst-class:: classref-item-separator
 
@@ -2336,7 +2430,7 @@ Allows using the device's IR transmitter, if available. See `TRANSMIT_IR <https:
 
 :ref:`bool<class_bool>` **permissions/uninstall_shortcut**
 
-Deprecated.
+**Deprecated:** This property may be changed or removed in future versions.
 
 .. rst-class:: classref-item-separator
 
@@ -2648,7 +2742,7 @@ If ``true``, allows the application to participate in the backup and restore inf
 
 :ref:`int<class_int>` **version/code**
 
-Machine-readable application version.
+Machine-readable application version. This must be incremented for every new release pushed to the Play Store.
 
 .. rst-class:: classref-item-separator
 
@@ -2660,49 +2754,7 @@ Machine-readable application version.
 
 :ref:`String<class_String>` **version/name**
 
-Application version visible to the user.
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_EditorExportPlatformAndroid_property_xr_features/hand_tracking:
-
-.. rst-class:: classref-property
-
-:ref:`int<class_int>` **xr_features/hand_tracking**
-
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_EditorExportPlatformAndroid_property_xr_features/hand_tracking_frequency:
-
-.. rst-class:: classref-property
-
-:ref:`int<class_int>` **xr_features/hand_tracking_frequency**
-
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
-
-.. rst-class:: classref-item-separator
-
-----
-
-.. _class_EditorExportPlatformAndroid_property_xr_features/passthrough:
-
-.. rst-class:: classref-property
-
-:ref:`int<class_int>` **xr_features/passthrough**
-
-.. container:: contribute
-
-	There is currently no description for this property. Please help us by :ref:`contributing one <doc_updating_the_class_reference>`!
+Application version visible to the user. Falls back to :ref:`ProjectSettings.application/config/version<class_ProjectSettings_property_application/config/version>` if left empty.
 
 .. rst-class:: classref-item-separator
 
@@ -2725,3 +2777,4 @@ Application version visible to the user.
 .. |static| replace:: :abbr:`static (This method doesn't need an instance to be called, so it can be called directly using the class name.)`
 .. |operator| replace:: :abbr:`operator (This method describes a valid operator to use with this type as left-hand operand.)`
 .. |bitfield| replace:: :abbr:`BitField (This value is an integer composed as a bitmask of the following flags.)`
+.. |void| replace:: :abbr:`void (No return value.)`

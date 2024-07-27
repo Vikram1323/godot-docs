@@ -19,7 +19,7 @@ Blends two of three animations linearly inside of an :ref:`AnimationNodeBlendTre
 Description
 -----------
 
-A resource to add to an :ref:`AnimationNodeBlendTree<class_AnimationNodeBlendTree>`. Blends two animations out of three linearly out of three based on the amounmt value.
+A resource to add to an :ref:`AnimationNodeBlendTree<class_AnimationNodeBlendTree>`. Blends two animations out of three linearly out of three based on the amount value.
 
 This animation node has three inputs:
 
@@ -45,3 +45,4 @@ Tutorials
 .. |static| replace:: :abbr:`static (This method doesn't need an instance to be called, so it can be called directly using the class name.)`
 .. |operator| replace:: :abbr:`operator (This method describes a valid operator to use with this type as left-hand operand.)`
 .. |bitfield| replace:: :abbr:`BitField (This value is an integer composed as a bitmask of the following flags.)`
+.. |void| replace:: :abbr:`void (No return value.)`

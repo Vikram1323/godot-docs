@@ -231,6 +231,14 @@ The OpenGL 3 rendering driver. It uses OpenGL 3.3 Core Profile on desktop platfo
 
 The Direct3D 12 rendering driver.
 
+.. _class_OS_constant_RENDERING_DRIVER_METAL:
+
+.. rst-class:: classref-enumeration-constant
+
+:ref:`RenderingDriver<enum_OS_RenderingDriver>` **RENDERING_DRIVER_METAL** = ``3``
+
+The Metal rendering driver.
+
 .. rst-class:: classref-item-separator
 
 ----
@@ -1056,6 +1064,8 @@ Returns the name of the host platform.
 Returns the exit code of a spawned process once it has finished running (see :ref:`is_process_running<class_OS_method_is_process_running>`).
 
 Returns ``-1`` if the ``pid`` is not a PID of a spawned child process, the process is still running, or the method is not implemented for the current platform.
+
+\ **Note:** Returns ``-1`` if the ``pid`` is a macOS bundled app process.
 
 \ **Note:** This method is implemented on Android, Linux, macOS and Windows.
 

@@ -88,6 +88,8 @@ Properties
    +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
    | :ref:`float<class_float>`                                          | :ref:`volume_db<class_AudioStreamPlayer3D_property_volume_db>`                                                       | ``0.0``       |
    +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
+   | :ref:`float<class_float>`                                          | :ref:`volume_linear<class_AudioStreamPlayer3D_property_volume_linear>`                                               |               |
+   +--------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------+
 
 .. rst-class:: classref-reftable-group
 
@@ -502,6 +504,7 @@ The playback type of the stream player. If set other than to the default value, 
 
 .. rst-class:: classref-property-setget
 
+- |void| **set_playing**\ (\ value\: :ref:`bool<class_bool>`\ )
 - :ref:`bool<class_bool>` **is_playing**\ (\ )
 
 If ``true``, audio is playing or is queued to be played (see :ref:`play<class_AudioStreamPlayer3D_method_play>`).
@@ -573,6 +576,25 @@ The factor for the attenuation effect. Higher values make the sound audible over
 - :ref:`float<class_float>` **get_volume_db**\ (\ )
 
 The base sound level before attenuation, in decibels.
+
+.. rst-class:: classref-item-separator
+
+----
+
+.. _class_AudioStreamPlayer3D_property_volume_linear:
+
+.. rst-class:: classref-property
+
+:ref:`float<class_float>` **volume_linear** :ref:`🔗<class_AudioStreamPlayer3D_property_volume_linear>`
+
+.. rst-class:: classref-property-setget
+
+- |void| **set_volume_linear**\ (\ value\: :ref:`float<class_float>`\ )
+- :ref:`float<class_float>` **get_volume_linear**\ (\ )
+
+The base sound level before attenuation, as a linear value.
+
+\ **Note:** This member modifies :ref:`volume_db<class_AudioStreamPlayer3D_property_volume_db>` for convenience. The returned value is equivalent to the result of :ref:`@GlobalScope.db_to_linear<class_@GlobalScope_method_db_to_linear>` on :ref:`volume_db<class_AudioStreamPlayer3D_property_volume_db>`. Setting this member is equivalent to setting :ref:`volume_db<class_AudioStreamPlayer3D_property_volume_db>` to the result of :ref:`@GlobalScope.linear_to_db<class_@GlobalScope_method_linear_to_db>` on a value.
 
 .. rst-class:: classref-section-separator
 

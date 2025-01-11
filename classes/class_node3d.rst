@@ -101,6 +101,8 @@ Methods
    +--------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Array<class_Array>`\[:ref:`Node3DGizmo<class_Node3DGizmo>`\] | :ref:`get_gizmos<class_Node3D_method_get_gizmos>`\ (\ ) |const|                                                                                                                                                                                                           |
    +--------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | :ref:`Transform3D<class_Transform3D>`                              | :ref:`get_global_transform_interpolated<class_Node3D_method_get_global_transform_interpolated>`\ (\ )                                                                                                                                                                     |
+   +--------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`Node3D<class_Node3D>`                                        | :ref:`get_parent_node_3d<class_Node3D_method_get_parent_node_3d>`\ (\ ) |const|                                                                                                                                                                                           |
    +--------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
    | :ref:`World3D<class_World3D>`                                      | :ref:`get_world_3d<class_Node3D_method_get_world_3d>`\ (\ ) |const|                                                                                                                                                                                                       |
@@ -648,6 +650,22 @@ Returns all the gizmos attached to this **Node3D**.
 
 ----
 
+.. _class_Node3D_method_get_global_transform_interpolated:
+
+.. rst-class:: classref-method
+
+:ref:`Transform3D<class_Transform3D>` **get_global_transform_interpolated**\ (\ ) :ref:`🔗<class_Node3D_method_get_global_transform_interpolated>`
+
+When using physics interpolation, there will be circumstances in which you want to know the interpolated (displayed) transform of a node rather than the standard transform (which may only be accurate to the most recent physics tick).
+
+This is particularly important for frame-based operations that take place in :ref:`Node._process<class_Node_private_method__process>`, rather than :ref:`Node._physics_process<class_Node_private_method__physics_process>`. Examples include :ref:`Camera3D<class_Camera3D>`\ s focusing on a node, or finding where to fire lasers from on a frame rather than physics tick.
+
+\ **Note:** This function creates an interpolation pump on the **Node3D** the first time it is called, which can respond to physics interpolation resets. If you get problems with "streaking" when initially following a **Node3D**, be sure to call :ref:`get_global_transform_interpolated<class_Node3D_method_get_global_transform_interpolated>` at least once *before* resetting the **Node3D** physics interpolation.
+
+.. rst-class:: classref-item-separator
+
+----
+
 .. _class_Node3D_method_get_parent_node_3d:
 
 .. rst-class:: classref-method
@@ -780,7 +798,9 @@ Rotates the node so that the local forward axis (-Z, :ref:`Vector3.FORWARD<class
 
 The local up axis (+Y) points as close to the ``up`` vector as possible while staying perpendicular to the local forward axis. The resulting transform is orthogonal, and the scale is preserved. Non-uniform scaling may not work correctly.
 
-The ``target`` position cannot be the same as the node's position, the ``up`` vector cannot be zero, and the direction from the node's position to the ``target`` vector cannot be parallel to the ``up`` vector.
+The ``target`` position cannot be the same as the node's position, the ``up`` vector cannot be zero.
+
+The ``target`` and the ``up`` cannot be :ref:`Vector3.ZERO<class_Vector3_constant_ZERO>`, and shouldn't be colinear to avoid unintended rotation around local Z axis.
 
 Operations take place in global space, which means that the node must be in the scene tree.
 
